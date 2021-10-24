@@ -6,7 +6,7 @@ function StockEntryExitTypeService() {
 
   service.exitTypes = [{
     label : 'patient',
-    labelKey : 'PATIENT_REG.ENTITY',
+    labelKey : 'INVOICING.CUSTOMER',
     descriptionKey : 'STOCK.PATIENT_DISTRIBUTION',
     allowedKey : 'allow_exit_debtor',
   }, {

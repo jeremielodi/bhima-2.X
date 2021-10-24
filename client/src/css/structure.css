@@ -1209,3 +1209,7 @@ table.lot-schedule .right {
 form.NoSubmitButton div.modal-footer button.btn-primary {
   display: none;
 }
+
+.fa-folder, .fa-folder-open {
+  color : #e67a16 !important
+}

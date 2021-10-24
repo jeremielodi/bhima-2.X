@@ -1,0 +1,11 @@
+{
+    "INVOICING" : { 
+        "CUSTOMER" : "Customer",
+        "CUSTOMER_REGISTER" : "Register customers",
+        "CUSTOMER_REGISTRY": "Customers registry",
+        "CUSTOMER_DETAILS" : "Customer's details",
+        "CUSTOMER_NUMBER" : "Order number",
+        "CUSTOMER_IDENTITY": "Customer info",
+        "CUSTOMER_REDISTERED" : "Customer registered"
+    }
+}

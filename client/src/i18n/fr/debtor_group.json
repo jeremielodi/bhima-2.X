@@ -51,7 +51,7 @@
     "CONVENTION": {
       "TITLE": "Convention",
       "DESCRIPTION": "Les factures des débiteurs de ce groupe seront couvertes par le compte de ce débiteur. Les patients appartenant à ce groupe seront empêchés de payer leurs factures à la caisse",
-      "CANNOT_PAY": "Ce patient ne paie pas de factures. Ses factures sont couvertes par"
+      "CANNOT_PAY": "Ce client ne paie pas de factures. Ses factures sont couvertes par"
     },
     "UPDATED": "Enregistrement du Groupe Débiteur mis à jour"
   }

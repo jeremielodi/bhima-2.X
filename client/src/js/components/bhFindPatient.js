@@ -52,11 +52,11 @@ function FindPatientComponent(Patients, AppCache, Notify, Session, bhConstants, 
     /* supported searches: by name or by id */
     $ctrl.options = {
       findById : {
-        label       : 'FORM.LABELS.PATIENT_ID',
+        label       : 'FORM.LABELS.ID',
         placeholder : 'FORM.PLACEHOLDERS.SEARCH_PATIENT_ID',
       },
       findByName : {
-        label       : 'FORM.LABELS.PATIENT_NAME',
+        label       : 'FORM.LABELS.NAME',
         placeholder : 'FORM.PLACEHOLDERS.SEARCH_NAME',
       },
     };

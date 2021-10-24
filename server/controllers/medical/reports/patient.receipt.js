@@ -24,17 +24,20 @@ const entityIdentifier = identifiers.PATIENT.key;
 
 // detailed patient identification - flag to determine if small or larger form
 const CARD_TEMPLATE = path.join(__dirname, 'patient.receipt.handlebars');
-
+const CUSTOMER_CARD_TEMPLATE = path.join(__dirname, 'customer.receipt.handlebars');
 // POS receipt, quick proof of registration
 const POS_TEMPLATE = path.join(__dirname, 'patient.pos.handlebars');
 
 // A4 Fiche Template
 const FICHE_TEMPLATE = path.join(__dirname, 'patient.fiche.handlebars');
 
+// A4 Fiche Template for customer
+const CUSTOMER_FICHE_TEMPLATE = path.join(__dirname, 'customer.fiche.handlebars');
+
 // default options for the patient card
 const defaults = {
-  format : 'A6',
-  landscape : true,
+  format: 'A6',
+  landscape: true,
 };
 
 exports.build = build;
@@ -43,25 +46,30 @@ async function build(req, res, next) {
   const qs = req.query;
   const options = _.defaults(qs, defaults);
 
-  let template = CARD_TEMPLATE;
-
+ 
   const requestedPOSReceipt = Boolean(Number(options.posReceipt));
   const requestedSimplifiedCard = Boolean(Number(options.simplified));
   const requestedA4Fiche = Boolean(Number(options.fiche));
 
-  // if the POS option is selected, render a thermal receipt.
-  if (requestedPOSReceipt) {
-    template = POS_TEMPLATE;
-  } else if (requestedA4Fiche) {
-    template = FICHE_TEMPLATE;
-    options.format = 'A4';
-    options.landscape = false;
-  }
+
 
   try {
-    const report = new ReportManager(template, req.session, options);
+   
     const patient = await Patients.lookupPatient(req.params.uuid);
+    
 
+    // if the POS option is selected, render a thermal receipt.
+    const isCustomer = !!patient.is_customer;
+    let template = isCustomer ? CUSTOMER_CARD_TEMPLATE : CARD_TEMPLATE;
+    if (requestedPOSReceipt) {
+      template = POS_TEMPLATE;
+    } else if (requestedA4Fiche) {
+      template = isCustomer ? CUSTOMER_FICHE_TEMPLATE : FICHE_TEMPLATE;
+      options.format = 'A4';
+      options.landscape = false;
+    }
+    const report = new ReportManager(template, req.session, options);
+    
     patient.barcode = barcode.generate(entityIdentifier, patient.uuid);
 
     patient.enterprise_name = req.session.enterprise.name;
@@ -73,7 +81,7 @@ async function build(req, res, next) {
     ]);
 
     const result = await report.render({
-      patient, village, currentVillage, simplified : requestedSimplifiedCard,
+      patient, village, currentVillage, simplified: requestedSimplifiedCard,
     });
 
     res.set(result.headers).send(result.report);

@@ -1,0 +1,81 @@
+{{> head title="PATIENT_REG.CARD" }}
+
+<body class="container">
+  <style>
+    @page {
+      /* A6 landscape */
+      size: 148mm 105mm;
+      margin : 1mm;
+    }
+  </style>
+
+  <div class="row">
+
+    <h5 style="margin-bottom : 0; margin-top:0;">
+      <strong>{{patient.enterprise_name}} - {{translate "INVOICING.CUSTOMER_IDENTITY"}}</strong>
+    </h5>
+
+    <hr />
+
+    <!-- left side is patient information -->
+    <div class="col-xs-7">
+      <h3 style="margin-top : 0px"><strong>{{patient.display_name}}</strong></h3>
+
+      {{#if patient.mother_name}}
+        <span><u>{{translate "FORM.LABELS.MOTHER_NAME"}}</u> {{patient.mother_name}}</span><br />
+      {{/if}}
+
+      {{#if patient.email}}
+        <span><u>{{translate "FORM.LABELS.EMAIL"}}</u> {{patient.email}}</span><br />
+      {{/if}}
+
+      {{#if patient.telephone}}
+        <span><u>{{translate "FORM.LABELS.TELEPHONE"}}</u> {{patient.telephone}}</span><br />
+      {{/if}}
+
+      <span><u>{{translate "FORM.LABELS.DEBTOR_GROUP"}}</u></span><br />
+      <span>{{ patient.debtor_group_name }}</span>
+
+    </div>
+
+    <!-- right side is enterprise information -->
+    <div class="col-xs-5" style="text-align:right;">
+      <h3 style="margin-top : 0px"><strong>{{patient.reference}}</strong></h3>
+      <span>{{translate "TABLE.COLUMNS.REGISTERED_ON"}} {{date patient.registration_date }}</span><br />
+      <span><b>{{translate "INVOICING.CUSTOMER_NUMBER"}}:</b> {{patient.hospital_no}}</span><br />
+      {{#if patient.health_zone}}
+      <span>{{translate "FORM.LABELS.HEALTH_ZONE"}}: {{patient.health_zone}}</span><br />
+      {{/if}}
+      {{#if patient.health_area}}
+      <span>{{translate "FORM.LABELS.HEALTH_AREA"}}: {{patient.health_area}}</span><br />
+      {{/if}}
+    </div>
+  </div>
+
+  <!-- Information only shown on larger form identities -->
+  {{#unless simplified}}
+  <div class="row" style="margin-top:0">
+    <div class="col-xs-7">
+     
+      {{#if patient.notes }}
+        <span><u>{{translate "FORM.LABELS.NOTES"}}</u></span> <br />
+        <p>{{patient.notes}}</p>
+      {{/if}}
+    </div>
+
+
+  </div>
+  {{/unless }}
+  <br/>
+  <br/>
+
+  {{#if metadata.enterprise.settings.enable_barcodes}}
+  <div class="row text-right" style="margin-top: 0.25em;">
+    <div class="col-xs-12">
+      {{> barcode value=patient.barcode }}
+    </div>
+  </div>
+
+  <script>JsBarcode('.barcode').init();</script>
+  {{/if}}
+</body>

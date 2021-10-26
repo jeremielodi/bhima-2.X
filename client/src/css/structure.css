@@ -368,7 +368,7 @@
 }
 
 .flex-tree li {
-  border-top: 1px solid #ccc;
+  /*border-top: 1px solid #ccc;*/
 }
 
 /* remove border from the first child; this overlaps with the nav header */
@@ -378,7 +378,7 @@
 
 /* make sure the bottom node has a bottom border */
 .flex-tree > ul > li:last-child {
-  border-bottom: 1px solid #ccc;
+  /*border-bottom: 1px solid #ccc;*/
 }
 
 .flex-tree a {
@@ -395,6 +395,45 @@
   color : #707070;
   cursor : pointer;
 }
+.flex-tree  ul{
+  padding-left: 1px;
+  margin-left: 5px;
+}
+.flex-tree  ul li {
+  border-left: 1px dashed #707070;
+}
+
+.flex-tree  ul li a::before
+ {
+  content: '--';
+  position: relative;
+  padding: 0px;
+  margin-left: -10px;
+  margin-right: 2px;
+}
+
+
+/* width */
+ ::-webkit-scrollbar {
+  width: 5px !important;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #fff;
+
+}
+
+/* Handle */
+ ::-webkit-scrollbar-thumb {
+  background: #aaa;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: rgb(153, 152, 152);
+}
+
 
 .subtree {
   border-left : 5px solid #707070;
@@ -1211,5 +1250,5 @@ form.NoSubmitButton div.modal-footer button.btn-primary {
 }
 
 .fa-folder, .fa-folder-open {
-  color : #e67a16 !important
+  color : #2089CE !important
 }

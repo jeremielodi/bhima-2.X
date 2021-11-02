@@ -5401,10 +5401,10 @@ karma-ng-html2js-preprocessor@^1.0.0:
   resolved "https://registry.npmjs.org/karma-ng-html2js-preprocessor/-/karma-ng-html2js-preprocessor-1.0.0.tgz#10d8c8cfaa4136f1c8a76d91a4cbceedebec4a31"
   integrity sha1-ENjIz6pBNvHIp22RpMvO7evsSjE=
 
-karma@^6.3.5:
-  version "6.3.5"
-  resolved "https://registry.yarnpkg.com/karma/-/karma-6.3.5.tgz#78c76dc40230590f89d2c1749a8eb049a6968dcc"
-  integrity sha512-uAwOPXtfEdIHIZdK7QcnKEv0BK/bg+AZikZ7TK1ZLk3apW/wNH74rbdamJby1CVVYw3I9PXxqeEo78OaiHeErA==
+karma@^6.3.7:
+  version "6.3.7"
+  resolved "https://registry.yarnpkg.com/karma/-/karma-6.3.7.tgz#35d7c7ff46d7cc21633075a9fdafcb495546bf9a"
+  integrity sha512-EEkswZhOx3EFt1ELlVECeOXHONbHSGw6fkbeMxvCSkLD77X38Kb1d/Oup2Re9ep/tSoa1He3YIBf3Hp+9EsKtg==
   dependencies:
     body-parser "^1.19.0"
     braces "^3.0.2"
@@ -5427,7 +5427,7 @@ karma@^6.3.5:
     socket.io "^4.2.0"
     source-map "^0.6.1"
     tmp "^0.2.1"
-    ua-parser-js "^0.7.28"
+    ua-parser-js "^0.7.30"
     yargs "^16.1.1"
 
 keyv@^3.0.0:
@@ -9050,10 +9050,10 @@ typescript@^4.4.4:
   resolved "https://registry.yarnpkg.com/typescript/-/typescript-4.4.4.tgz#2cd01a1a1f160704d3101fd5a58ff0f9fcb8030c"
   integrity sha512-DqGhF5IKoBl8WNf8C1gu8q0xZSInh9j1kJJMqT3a94w1JzVaBU4EXOSMrz9yDqMT0xt3selp83fuFMQ0uzv6qA==
 
-ua-parser-js@^0.7.28:
-  version "0.7.28"
-  resolved "https://registry.npmjs.org/ua-parser-js/-/ua-parser-js-0.7.28.tgz#8ba04e653f35ce210239c64661685bf9121dec31"
-  integrity sha512-6Gurc1n//gjp9eQNXjD9O3M/sMwVtN5S8Lv9bvOYBfKfDNiIIhqiyi01vMBO45u4zkDE420w/e0se7Vs+sIg+g==
+ua-parser-js@^0.7.30:
+  version "0.7.31"
+  resolved "https://registry.yarnpkg.com/ua-parser-js/-/ua-parser-js-0.7.31.tgz#649a656b191dffab4f21d5e053e27ca17cbff5c6"
+  integrity sha512-qLK/Xe9E2uzmYI3qLeOmI0tEOt+TBBQyUIAh4aAgU05FVYzeZrKUdkAZfBNVGRaHVgV0TDkdEngJSw/SyQchkQ==
 
 uglify-js@^3.0.5, uglify-js@^3.1.4:
   version "3.13.9"

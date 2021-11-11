@@ -13,7 +13,7 @@ const bhima = angular.module('bhima', [
 
 
 function unsafeUrl($sceDelegateProvider) {
-  $sceDelegateProvider.resourceUrlWhitelist([
+  $sceDelegateProvider.trustedResourceUrlList([
     // Insecure - the wildcard allows resource loading from any domain using any protocol
     '**'
   ]);

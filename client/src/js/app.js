@@ -11,6 +11,14 @@ const bhima = angular.module('bhima', [
   'growlNotifications', 'ngAnimate', 'ngSanitize', 'ui.select', 'ngTouch', 'webcam',
 ]);
 
+
+function unsafeUrl($sceDelegateProvider) {
+  $sceDelegateProvider.resourceUrlWhitelist([
+    // Insecure - the wildcard allows resource loading from any domain using any protocol
+    '**'
+  ]);
+}
+
 function bhimaConfig($urlMatcherFactoryProvider) {
   // allow trailing slashes in routes
   $urlMatcherFactoryProvider.strictMode(false);
@@ -19,8 +27,8 @@ function bhimaConfig($urlMatcherFactoryProvider) {
 function translateConfig($translateProvider) {
   // TODO Review i18n and determine if this it the right solution
   $translateProvider.useStaticFilesLoader({
-    prefix : '/i18n/',
-    suffix : '.json',
+    prefix: '/i18n/',
+    suffix: '.json',
   });
 
   $translateProvider.useSanitizeValueStrategy('escape');
@@ -59,9 +67,9 @@ function startupConfig(
         return false;
       }
 
-    // if the user is not logged in and trying to access any other state, deny
-    // the attempt with a message that their session expired and redirect them
-    // to the login page.
+      // if the user is not logged in and trying to access any other state, deny
+      // the attempt with a message that their session expired and redirect them
+      // to the login page.
     } if (!isAuthenticated && !isLoginState && !isInstallState) {
       return stateService.target('login');
 
@@ -179,6 +187,9 @@ bhima.config(['$httpProvider', httpConfig]);
 bhima.config(['$animateProvider', animateConfig]);
 bhima.config(['$uibModalProvider', uiModalConfig]);
 bhima.config(['$compileProvider', compileConfig]);
+bhima.config(['$sceDelegateProvider', unsafeUrl]);
+
+
 
 // run the application
 bhima.run([

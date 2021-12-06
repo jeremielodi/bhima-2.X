@@ -169,7 +169,8 @@ function getFiscalYearDetails(fiscalYearId) {
 function formatReferences(references) {
   const values = {};
   _.forEach(references, (reference, key) => {
-    const [brut] = reference.filter(elt => elt.is_amo_dep === 0);
+    const bruts = reference.filter(elt => elt.is_amo_dep === 0);
+    const brut = bruts[0] || {};
     let [amortissement] = reference.filter(elt => elt.is_amo_dep === 1);
 
     if (!amortissement) {

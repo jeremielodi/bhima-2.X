@@ -81,7 +81,7 @@ function StockMovementsRegistryTests() {
 
   it('find by lots reasons for allocation to patient', async () => {
     // to patient
-    await modal.setMovementReason(['Vers un patient']);
+    await modal.setMovementReason(['Vers un client']);
     await modal.submit();
     await GU.expectRowCount(gridId, 5 + depotGroupingRow);
   });

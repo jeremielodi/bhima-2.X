@@ -53,8 +53,12 @@ async function document(req, res, next) {
   const data = {};
 
   const thirdYear = await Fiscal.lookupFiscalYear(fiscalYearId);
-  const secondYear = await Fiscal.lookupFiscalYear(thirdYear.previous_fiscal_year_id);
-  const firstYear = await Fiscal.lookupFiscalYear(secondYear.previous_fiscal_year_id);
+  let secondYear = null;
+  let firstYear = null;
+  if(thirdYear.previous_fiscal_year_id !== null) {
+    secondYear = await Fiscal.lookupFiscalYear(thirdYear.previous_fiscal_year_id);
+    firstYear = await Fiscal.lookupFiscalYear(secondYear.previous_fiscal_year_id);
+  }
 
   if (!firstYear || !secondYear || !thirdYear) {
     res.status(500).json({ msg : `bad fiscal year's range` });

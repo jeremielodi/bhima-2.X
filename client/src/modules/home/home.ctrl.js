@@ -31,6 +31,8 @@ function HomeController(Currencies, Rates, Session, Notify, Fiscal, DashboardSer
   vm.project = Session.project;
   vm.user = Session.user;
   vm.enterprise = Session.enterprise;
+  vm.correctDisplay = [];
+
   // load exchange rates
   Currencies.read(true)
     .then((currencies) => {
@@ -44,16 +46,19 @@ function HomeController(Currencies, Rates, Session, Notify, Fiscal, DashboardSer
     })
     .then(() => {
       vm.currencies.forEach((currency) => {
-        /*
-          currency.isFirstCurencyLabel is used to check the exchange Rate
-          is lower then 1  the program show display something
-          much better for reading
-        */
-        currency.isFirstCurencyLabel = false;
+        
         const exchange = Rates.getCurrentExchange(currency.id);
         currency.rate = exchange.rate;
         currency.date = exchange.date;
         currency.formattedDate = new Moment(currency.date).format('LL');
+
+        vm.correctDisplay.push({
+          curerency_rate : currency.rate < 1 ? 1 : currency.rate,
+          curerency_symbol : currency.symbol,
+          curerency_date : currency.formattedDate,
+          entreprice_currency : currency.rate < 1 ? (1/currency.rate).toFixed(2) : 1,
+          entreprice_currency_symbol : vm.enterprise.currencySymbol,
+        })
       });
 
       // @TODO Method for selecting primary exchange

@@ -27,138 +27,138 @@ const TEMPLATE = './server/controllers/finance/reports/ohada_profit_loss/report.
 
 // default report parameters
 const DEFAULT_PARAMS = {
-  csvKey : 'accounts',
-  filename : 'TREE.BALANCE',
-  orientation : 'landscape',
+  csvKey: 'accounts',
+  filename: 'TREE.BALANCE',
+  orientation: 'landscape',
 };
 
 // RB, RD, RF
 const profitLossTable = [
   {
-    ref : 'TA', is_title : 0, sign : '+', note : 21,
+    ref: 'TA', is_title: 0, sign: '+', note: 21,
   },
   {
-    ref : 'RA', is_title : 0, sign : '-', note : 22,
+    ref: 'RA', is_title: 0, sign: '-', note: 22,
   },
   {
-    ref : 'RB', is_title : 0, sign : '-/+', note : 6,
+    ref: 'RB', is_title: 0, sign: '-/+', note: 6,
   },
   {
-    ref : 'XA', is_title : 1, sign : '', note : '',
+    ref: 'XA', is_title: 1, sign: '', note: '',
   },
   {
-    ref : 'TB', is_title : 0, sign : '+', note : 21,
+    ref: 'TB', is_title: 0, sign: '+', note: 21,
   },
   {
-    ref : 'TC', is_title : 0, sign : '+', note : 21,
+    ref: 'TC', is_title: 0, sign: '+', note: 21,
   },
   {
-    ref : 'TD', is_title : 0, sign : '+', note : 21,
+    ref: 'TD', is_title: 0, sign: '+', note: 21,
   },
   {
-    ref : 'XB', is_title : 1, sign : '', note : '',
+    ref: 'XB', is_title: 1, sign: '', note: '',
   },
   {
-    ref : 'TE', is_title : 0, sign : '+', note : 6,
+    ref: 'TE', is_title: 0, sign: '+', note: 6,
   },
   {
-    ref : 'TF', is_title : 0, sign : '+', note : 21,
+    ref: 'TF', is_title: 0, sign: '+', note: 21,
   },
   {
-    ref : 'TG', is_title : 0, sign : '+', note : 21,
+    ref: 'TG', is_title: 0, sign: '+', note: 21,
   },
   {
-    ref : 'TH', is_title : 0, sign : '+', note : 21,
+    ref: 'TH', is_title: 0, sign: '+', note: 21,
   },
   {
-    ref : 'TI', is_title : 0, sign : '+', note : 12,
+    ref: 'TI', is_title: 0, sign: '+', note: 12,
   },
   {
-    ref : 'RC', is_title : 0, sign : '-', note : 22,
+    ref: 'RC', is_title: 0, sign: '-', note: 22,
   },
   {
-    ref : 'RD', is_title : 0, sign : '-/+', note : 6,
+    ref: 'RD', is_title: 0, sign: '-/+', note: 6,
   },
   {
-    ref : 'RE', is_title : 0, sign : '-', note : 22,
+    ref: 'RE', is_title: 0, sign: '-', note: 22,
   },
   {
-    ref : 'RF', is_title : 0, sign : '-/+', note : 6,
+    ref: 'RF', is_title: 0, sign: '-/+', note: 6,
   },
   {
-    ref : 'RG', is_title : 0, sign : '-', note : 23,
+    ref: 'RG', is_title: 0, sign: '-', note: 23,
   },
   {
-    ref : 'RH', is_title : 0, sign : '-', note : 24,
+    ref: 'RH', is_title: 0, sign: '-', note: 24,
   },
   {
-    ref : 'RI', is_title : 0, sign : '-', note : 25,
+    ref: 'RI', is_title: 0, sign: '-', note: 25,
   },
   {
-    ref : 'RJ', is_title : 0, sign : '-', note : 26,
+    ref: 'RJ', is_title: 0, sign: '-', note: 26,
   },
   {
-    ref : 'XC', is_title : 1, sign : '', note : '',
+    ref: 'XC', is_title: 1, sign: '', note: '',
   },
   {
-    ref : 'RK', is_title : 0, sign : '-', note : 27,
+    ref: 'RK', is_title: 0, sign: '-', note: 27,
   },
   {
-    ref : 'XD', is_title : 1, sign : '', note : '',
+    ref: 'XD', is_title: 1, sign: '', note: '',
   },
   {
-    ref : 'TJ', is_title : 0, sign : '+', note : 28,
+    ref: 'TJ', is_title: 0, sign: '+', note: 28,
   },
   {
-    ref : 'RL', is_title : 0, sign : '-', note : '3C&28',
+    ref: 'RL', is_title: 0, sign: '-', note: '3C&28',
   },
   {
-    ref : 'XE', is_title : 1, sign : '', note : '',
+    ref: 'XE', is_title: 1, sign: '', note: '',
   },
   {
-    ref : 'TK', is_title : 0, sign : '+', note : 29,
+    ref: 'TK', is_title: 0, sign: '+', note: 29,
   },
   {
-    ref : 'TL', is_title : 0, sign : '+', note : 28,
+    ref: 'TL', is_title: 0, sign: '+', note: 28,
   },
   {
-    ref : 'TM', is_title : 0, sign : '+', note : 12,
+    ref: 'TM', is_title: 0, sign: '+', note: 12,
   },
   {
-    ref : 'RM', is_title : 0, sign : '-', note : 29,
+    ref: 'RM', is_title: 0, sign: '-', note: 29,
   },
   {
-    ref : 'RN', is_title : 0, sign : '-', note : '3C&28',
+    ref: 'RN', is_title: 0, sign: '-', note: '3C&28',
   },
   {
-    ref : 'XF', is_title : 1, sign : '', note : '',
+    ref: 'XF', is_title: 1, sign: '', note: '',
   },
   {
-    ref : 'XG', is_title : 1, sign : '', note : '',
+    ref: 'XG', is_title: 1, sign: '', note: '',
   },
   {
-    ref : 'TN', is_title : 0, sign : '+', note : '3D',
+    ref: 'TN', is_title: 0, sign: '+', note: '3D',
   },
   {
-    ref : 'TO', is_title : 0, sign : '+', note : 30,
+    ref: 'TO', is_title: 0, sign: '+', note: 30,
   },
   {
-    ref : 'RO', is_title : 0, sign : '-', note : '3D',
+    ref: 'RO', is_title: 0, sign: '-', note: '3D',
   },
   {
-    ref : 'RP', is_title : 0, sign : '-', note : 30,
+    ref: 'RP', is_title: 0, sign: '-', note: 30,
   },
   {
-    ref : 'XH', is_title : 1, sign : '', note : '',
+    ref: 'XH', is_title: 1, sign: '', note: '',
   },
   {
-    ref : 'RQ', is_title : 0, sign : '-', note : 30,
+    ref: 'RQ', is_title: 0, sign: '-', note: 30,
   },
   {
-    ref : 'RS', is_title : 0, sign : '-', note : '',
+    ref: 'RS', is_title: 0, sign: '-', note: '',
   },
   {
-    ref : 'XI', is_title : 1, sign : '', note : '',
+    ref: 'XI', is_title: 1, sign: '', note: '',
   },
 ];
 
@@ -174,7 +174,7 @@ profitLossTable.forEach(item => {
  * @param {*} options the report options
  * @param {*} session the session
  */
-function reporting(options, session) {
+async function reporting(options, session) {
   const params = options;
   const context = {};
 
@@ -182,121 +182,121 @@ function reporting(options, session) {
 
   const report = new ReportManager(TEMPLATE, session, params);
 
-  return getFiscalYearDetails(params.fiscal_id)
-    .then(fiscalYear => {
-      _.merge(context, { fiscalYear });
+  const fiscalYear = await getFiscalYearDetails(params.fiscal_id);
+  _.merge(context, { fiscalYear });
 
-      const currentPeriodReferences = AccountReference.computeAllAccountReference(fiscalYear.current.period_id);
+ 
+  const currentData = await AccountReference.computeAllAccountReference(fiscalYear.current.period_id);
+  
+  let previousData = {}
+ 
+  if (Object.keys(fiscalYear.previous || {}).length > 0) {
+    previousData = await AccountReference.computeAllAccountReference(fiscalYear.previous.period_id);
+  }
 
-      const firstChoice = AccountReference.computeAllAccountReference(fiscalYear.previous.period_id);
-      const previousPeriodReferences = fiscalYear.previous.period_id ? firstChoice : [];
-      return Q.all([currentPeriodReferences, previousPeriodReferences]);
-    })
-    .spread((currentData, previousData) => {
+  const currentReferences = formatReferences(_.groupBy(currentData, 'abbr'));
+  const previousReferences = formatReferences(_.groupBy(previousData, 'abbr'));
 
-      const currentReferences = formatReferences(_.groupBy(currentData, 'abbr'));
-      const previousReferences = formatReferences(_.groupBy(previousData, 'abbr'));
+  const totals = {
+    currentNet: 0,
+    previousNet: 0,
+  };
 
-      const totals = {
-        currentNet : 0,
-        previousNet : 0,
-      };
+  const assetTable = profitLossTable.map(item => {
+    item.label = 'REPORT.OHADA.REF_DESCRIPTION.'.concat(item.ref);
+    const current = currentReferences[item.ref];
+    const previous = previousReferences[item.ref];
 
-      const assetTable = profitLossTable.map(item => {
-        item.label = 'REPORT.OHADA.REF_DESCRIPTION.'.concat(item.ref);
-        const current = currentReferences[item.ref];
-        const previous = previousReferences[item.ref];
+    if (current) {
+      item.currentBrut = current.brut.balance;
+      item.currentAmo = current.amortissement.balance;
+      item.currentNet = current.net.balance;
+      item.previousNet = previous ? previous.net.balance : 0;
 
-        if (current) {
-          item.currentBrut = current.brut.balance;
-          item.currentAmo = current.amortissement.balance;
-          item.currentNet = current.net.balance;
-          item.previousNet = previous ? previous.net.balance : 0;
+      totals.currentNet += item.currentNet;
+      totals.previousNet += item.previousNet;
 
-          totals.currentNet += item.currentNet;
-          totals.previousNet += item.previousNet;
+      setSign(item);
+    }
 
-          setSign(item);
-        }
+    // process manually totals
+    let list = [];
+    if (item.ref === 'XA') {
+      list = ['TA', 'RA', 'RB'];
+      _.extend(item, aggregateReferences(list, currentReferences, previousReferences, mapTable));
+    }
 
-        // process manually totals
-        let list = [];
-        if (item.ref === 'XA') {
-          list = ['TA', 'RA', 'RB'];
-          _.extend(item, aggregateReferences(list, currentReferences, previousReferences, mapTable));
-        }
+    if (item.ref === 'XB') {
+      list = ['TA', 'TB', 'TC', 'TD'];
+      _.extend(item, aggregateReferences(list, currentReferences, previousReferences, mapTable));
+    }
 
-        if (item.ref === 'XB') {
-          list = ['TA', 'TB', 'TC', 'TD'];
-          _.extend(item, aggregateReferences(list, currentReferences, previousReferences, mapTable));
-        }
+    if (item.ref === 'XC') {
+      list = [
+        'TA', 'TB', 'TC', 'TD', 'RA', 'RB',
+        'TE', 'TF', 'TG', 'TH', 'TI', 'RC', 'RD', 'RE', 'RF', 'RG', 'RH', 'RI', 'RJ',
+      ];
+      _.extend(item, aggregateReferences(list, currentReferences, previousReferences, mapTable));
+    }
 
-        if (item.ref === 'XC') {
-          list = [
-            'TA', 'TB', 'TC', 'TD', 'RA', 'RB',
-            'TE', 'TF', 'TG', 'TH', 'TI', 'RC', 'RD', 'RE', 'RF', 'RG', 'RH', 'RI', 'RJ',
-          ];
-          _.extend(item, aggregateReferences(list, currentReferences, previousReferences, mapTable));
-        }
+    if (item.ref === 'XD') {
+      list = [
+        'TA', 'TB', 'TC', 'TD', 'RA', 'RB',
+        'TE', 'TF', 'TG', 'TH', 'TI', 'RC', 'RD', 'RE', 'RF', 'RG', 'RH', 'RI', 'RJ',
+        'RK'];
+      _.extend(item, aggregateReferences(list, currentReferences, previousReferences, mapTable));
+    }
 
-        if (item.ref === 'XD') {
-          list = [
-            'TA', 'TB', 'TC', 'TD', 'RA', 'RB',
-            'TE', 'TF', 'TG', 'TH', 'TI', 'RC', 'RD', 'RE', 'RF', 'RG', 'RH', 'RI', 'RJ',
-            'RK'];
-          _.extend(item, aggregateReferences(list, currentReferences, previousReferences, mapTable));
-        }
+    if (item.ref === 'XE') {
+      list = [
+        'TA', 'TB', 'TC', 'TD', 'RA', 'RB',
+        'TE', 'TF', 'TG', 'TH', 'TI', 'RC', 'RD', 'RE', 'RF', 'RG', 'RH', 'RI', 'RJ',
+        'RK',
+        'TJ', 'RL'];
+      _.extend(item, aggregateReferences(list, currentReferences, previousReferences, mapTable));
+    }
 
-        if (item.ref === 'XE') {
-          list = [
-            'TA', 'TB', 'TC', 'TD', 'RA', 'RB',
-            'TE', 'TF', 'TG', 'TH', 'TI', 'RC', 'RD', 'RE', 'RF', 'RG', 'RH', 'RI', 'RJ',
-            'RK',
-            'TJ', 'RL'];
-          _.extend(item, aggregateReferences(list, currentReferences, previousReferences, mapTable));
-        }
+    if (item.ref === 'XF') {
+      list = ['TK', 'TL', 'TM', 'RM', 'RN'];
+      _.extend(item, aggregateReferences(list, currentReferences, previousReferences, mapTable));
+    }
 
-        if (item.ref === 'XF') {
-          list = ['TK', 'TL', 'TM', 'RM', 'RN'];
-          _.extend(item, aggregateReferences(list, currentReferences, previousReferences, mapTable));
-        }
+    if (item.ref === 'XG') {
+      list = [
+        'TA', 'TB', 'TC', 'TD', 'RA', 'RB',
+        'TE', 'TF', 'TG', 'TH', 'TI', 'RC', 'RD', 'RE', 'RF', 'RG', 'RH', 'RI', 'RJ',
+        'RK',
+        'TJ', 'RL',
+        'TK', 'TL', 'TM', 'RM', 'RN',
+      ];
+      _.extend(item, aggregateReferences(list, currentReferences, previousReferences, mapTable));
+    }
 
-        if (item.ref === 'XG') {
-          list = [
-            'TA', 'TB', 'TC', 'TD', 'RA', 'RB',
-            'TE', 'TF', 'TG', 'TH', 'TI', 'RC', 'RD', 'RE', 'RF', 'RG', 'RH', 'RI', 'RJ',
-            'RK',
-            'TJ', 'RL',
-            'TK', 'TL', 'TM', 'RM', 'RN',
-          ];
-          _.extend(item, aggregateReferences(list, currentReferences, previousReferences, mapTable));
-        }
+    if (item.ref === 'XH') {
+      list = ['TN', 'TO', 'RO'];
+      _.extend(item, aggregateReferences(list, currentReferences, previousReferences, mapTable));
+    }
 
-        if (item.ref === 'XH') {
-          list = ['TN', 'TO', 'RO'];
-          _.extend(item, aggregateReferences(list, currentReferences, previousReferences, mapTable));
-        }
+    if (item.ref === 'XI') {
+      list = [
+        'TA', 'TB', 'TC', 'TD', 'RA', 'RB',
+        'TE', 'TF', 'TG', 'TH', 'TI', 'RC', 'RD', 'RE', 'RF', 'RG', 'RH', 'RI', 'RJ',
+        'RK',
+        'TJ', 'RL',
+        'TK', 'TL', 'TM', 'RM', 'RN',
+        'TN', 'TO', 'RO',
+        'RQ', 'RS'];
 
-        if (item.ref === 'XI') {
-          list = [
-            'TA', 'TB', 'TC', 'TD', 'RA', 'RB',
-            'TE', 'TF', 'TG', 'TH', 'TI', 'RC', 'RD', 'RE', 'RF', 'RG', 'RH', 'RI', 'RJ',
-            'RK',
-            'TJ', 'RL',
-            'TK', 'TL', 'TM', 'RM', 'RN',
-            'TN', 'TO', 'RO',
-            'RQ', 'RS'];
+      _.extend(item, aggregateReferences(list, currentReferences, previousReferences, mapTable));
+    }
 
-          _.extend(item, aggregateReferences(list, currentReferences, previousReferences, mapTable));
-        }
+    return item;
+  });
 
-        return item;
-      });
+  _.merge(context, { assetTable }, { totals });
 
-      _.merge(context, { assetTable }, { totals });
+  return report.render(context);
 
-      return report.render(context);
-    });
 }
 
 /**
@@ -308,7 +308,10 @@ function document(req, res, next) {
     .then(result => {
       res.set(result.header).send(result.report);
     })
-    .catch(next);
+    .catch((error) => {
+      console.log('fail');
+      next(error);
+    });
 }
 
 function setSign(item) {
@@ -324,20 +327,21 @@ function setSign(item) {
 function formatReferences(references) {
   const values = {};
   _.forEach(references, (reference, key) => {
-    const [brut] = reference.filter(elt => elt.is_amo_dep === 0);
+    const bruts = reference.filter(elt => elt.is_amo_dep === 0);
+    const brut = bruts[0] || {};
     let [amortissement] = reference.filter(elt => elt.is_amo_dep === 1);
 
     if (!amortissement) {
-      amortissement = { balance : 0 };
+      amortissement = { balance: 0 };
     }
 
     const net = {
-      abbr : brut.abbr,
-      description : brut.description,
+      abbr: brut.abbr,
+      description: brut.description,
       // reduce amortissement from brut
       // the amortissement is supposed to be < 0
       // that the reason we use brut + amortissement which is implicitly brut - amortissement
-      balance : brut.balance + amortissement.balance,
+      balance: brut.balance + amortissement.balance,
     };
 
     values[key] = { brut, amortissement, net };
@@ -345,7 +349,7 @@ function formatReferences(references) {
   return values;
 }
 
-function getFiscalYearDetails(fiscalYearId) {
+async function getFiscalYearDetails(fiscalYearId) {
   const bundle = {};
   // get fiscal year details and the last period id of the fiscal year
   const query = `
@@ -360,22 +364,20 @@ function getFiscalYearDetails(fiscalYearId) {
         WHERE period.fiscal_year_id = ? AND period.number < 13)
     WHERE fy.id = ?;
   `;
-  return db.one(query, [fiscalYearId, fiscalYearId])
-    .then(fiscalYear => {
-      bundle.current = fiscalYear;
-      const detailsParams = [bundle.current.previous_fiscal_year_id, bundle.current.previous_fiscal_year_id];
-      return bundle.current.previous_fiscal_year_id ? db.one(query, detailsParams) : {};
-    })
-    .then(previousFiscalYear => {
-      bundle.previous = previousFiscalYear;
-
-      return bundle;
-    });
+  const fiscalYear = await db.one(query, [fiscalYearId, fiscalYearId]);
+  bundle.current = fiscalYear;
+  if (fiscalYear.previous_fiscal_year_id !== null) {
+    const detailsParams = [bundle.current.previous_fiscal_year_id, bundle.current.previous_fiscal_year_id];
+    bundle.previous = await db.one(query, detailsParams);
+  } else {
+    bundle.previous = {};
+  }
+  return bundle;
 }
 
 function aggregateReferences(references, currentDb, previousDb, mapRef) {
   const item = {
-    currentBrut : 0, currentAmo : 0, currentNet : 0, previousNet : 0,
+    currentBrut: 0, currentAmo: 0, currentNet: 0, previousNet: 0,
   };
 
   references.forEach(ref => {

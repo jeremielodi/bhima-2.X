@@ -28,105 +28,103 @@ const EXPENSE_TYPE_ID = 5;
 const TITLE_ID = 6;
 
 const DEFAULT_PARAMS = {
-  csvKey : 'rows',
-  filename : 'TREE.INCOME_EXPENSE',
+  csvKey: 'rows',
+  filename: 'TREE.INCOME_EXPENSE',
 };
 
 // expose to the API
 exports.document = document;
 
-function document(req, res, next) {
+async function document(req, res, next) {
   let report;
 
   const options = _.defaults(req.query, DEFAULT_PARAMS);
 
   try {
     report = new ReportManager(TEMPLATE, req.session, options);
+
+    const { periodFromId, periodToId, fiscalYearId } = options;
+    const data = {};
+
+    const [periodFrom, periodTo, fiscalYear] = await Promise.all([
+      getPeriodById(periodFromId),
+      getPeriodById(periodToId),
+      Fiscal.lookupFiscalYear(fiscalYearId),
+    ]);
+
+    if (periodFrom.start_date > periodTo.start_date) {
+      throw new BadRequest('The date range is inverted.', 'ERRORS.BAD_DATE_INTERVAL');
+    }
+
+    _.extend(data, { periodFrom, periodTo, fiscalYear });
+
+    // retrieve both the current balances and the previous year balances
+    const currentBalances = await getAccountBalances(fiscalYear.id, periodFrom.number, periodTo.number);
+    let previousBalances = [];
+    let previousFiscalYear = {};
+    if (fiscalYear.previous_fiscal_year_id !== null) {
+      previousBalances = await getAccountBalances(fiscalYear.previous_fiscal_year_id, periodFrom.number, periodTo.number);
+      previousFiscalYear = await Fiscal.lookupFiscalYear(fiscalYear.previous_fiscal_year_id);
+    }
+
+    const dataset = combineIntoSingleDataset(currentBalances, previousBalances);
+    const tree = constructAndPruneTree(dataset);
+
+    const root = tree.getRootNode();
+
+    if (!Array.isArray(root.children) || root.children.length < 2) {
+      throw new BadRequest(
+        'Could not find both income and expense accounts for the time period',
+        'ERRORS.NO_DATA_FOUND',
+      );
+    }
+
+    const isIncomeFirstElement = root.children[0].isIncomeAccount;
+
+    let income = {};
+    let expense = {};
+    if (isIncomeFirstElement) {
+      [income, expense] = root.children;
+    } else {
+      [expense, income] = root.children;
+    }
+
+    const profits = [];
+    const losses = [];
+
+    tree.walk(node => profits.push(node), true, income);
+    tree.walk(node => losses.push(node), true, expense);
+
+    // calculate totals and profit
+    const emptyTotal = { balance: 0, previousBalance: 0, difference: 0 };
+    const totals = {
+      income: profits[0] || emptyTotal,
+      expense: losses[0] || emptyTotal,
+    };
+
+    // compute the difference between the income and expense
+    totals.result = totals.income.balance + totals.expense.balance;
+
+    // computes the variance on the income/expense
+    profits.forEach(account => {
+      account.variance = variance(account.balance, account.previousBalance);
+    });
+
+    losses.forEach(account => {
+      account.variance = variance(account.balance, account.previousBalance);
+    });
+
+    _.extend(data, {
+      profits, losses, previousFiscalYear, totals,
+    });
+
+    const result = await report.render(data);
+    res.set(result.headers).send(result.report);
   } catch (e) {
     next(e);
     return;
   }
 
-  const { periodFromId, periodToId, fiscalYearId } = options;
-  const data = {};
-
-  Promise.all([
-    getPeriodById(periodFromId),
-    getPeriodById(periodToId),
-    Fiscal.lookupFiscalYear(fiscalYearId),
-  ])
-    .then(([periodFrom, periodTo, fiscalYear]) => {
-      if (periodFrom.start_date > periodTo.start_date) {
-        throw new BadRequest('The date range is inverted.', 'ERRORS.BAD_DATE_INTERVAL');
-      }
-
-      _.extend(data, { periodFrom, periodTo, fiscalYear });
-
-      // retrieve both the current balances and the previous year balances
-      return Promise.all([
-        getAccountBalances(fiscalYear.id, periodFrom.number, periodTo.number),
-        getAccountBalances(fiscalYear.previous_fiscal_year_id, periodFrom.number, periodTo.number),
-        Fiscal.lookupFiscalYear(fiscalYear.previous_fiscal_year_id),
-      ]);
-    })
-    .then(([currentBalances, previousBalances, previousFiscalYear]) => {
-      const dataset = combineIntoSingleDataset(currentBalances, previousBalances);
-      const tree = constructAndPruneTree(dataset);
-
-      const root = tree.getRootNode();
-
-      if (!Array.isArray(root.children) || root.children.length < 2) {
-        throw new BadRequest(
-          'Could not find both income and expense accounts for the time period',
-          'ERRORS.NO_DATA_FOUND',
-        );
-      }
-
-      const isIncomeFirstElement = root.children[0].isIncomeAccount;
-
-      let income = {};
-      let expense = {};
-      if (isIncomeFirstElement) {
-        [income, expense] = root.children;
-      } else {
-        [expense, income] = root.children;
-      }
-
-      const profits = [];
-      const losses = [];
-
-      tree.walk(node => profits.push(node), true, income);
-      tree.walk(node => losses.push(node), true, expense);
-
-      // calculate totals and profit
-      const emptyTotal = { balance : 0, previousBalance : 0, difference : 0 };
-      const totals = {
-        income :  profits[0] || emptyTotal,
-        expense : losses[0] || emptyTotal,
-      };
-
-      // compute the difference between the income and expense
-      totals.result = totals.income.balance + totals.expense.balance;
-
-      // computes the variance on the income/expense
-      profits.forEach(account => {
-        account.variance = variance(account.balance, account.previousBalance);
-      });
-
-      losses.forEach(account => {
-        account.variance = variance(account.balance, account.previousBalance);
-      });
-
-      _.extend(data, {
-        profits, losses, previousFiscalYear, totals,
-      });
-
-      return report.render(data);
-    })
-    .then(result => {
-      res.set(result.headers).send(result.report);
-    })
-    .catch(next);
 }
 
 function variance(current, previous) {
@@ -210,7 +208,7 @@ function combineIntoSingleDataset(currentBalances, previousBalances) {
       const previousBalance = previous ? previous.balance : 0;
       _.extend(record, current, { previousBalance });
     } else {
-      _.extend(record, previous, { balance : 0 }, { previousBalance : previous.balance });
+      _.extend(record, previous, { balance: 0 }, { previousBalance: previous.balance });
     }
 
     // compute the difference between this and last year's balance

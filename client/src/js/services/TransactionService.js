@@ -124,8 +124,8 @@ function TransactionService($http, util, Modal, Accounts) {
       if (hasSingleNumericValue) {
         return ERROR_INVALID_DEBITS_AND_CREDITS;
       }
-
-      const hasCostCenters = angular.isDefined(row.cost_center_id);
+      
+      const hasCostCenters = row.cost_center_id !== null;
       if (hasCostCenters && !Accounts.isIncomeOrExpenseAccountTypeId(row.account_type_id)) {
         return ERROR_COST_CENTER_ON_OTHER_ACCOUNT;
       }

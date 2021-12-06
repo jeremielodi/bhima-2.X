@@ -19,7 +19,7 @@ Il faut noter que chaque opération d'sortie de stock concerne des dépôts, vou
 </div>
 
 Le module de sortie de stock dispose de quatre options pour les sorties de stock : 
-- **Patient** : Si vous voulez faire sortir des produits du dépôt (qui peut aussi bien être une pharmacie) vers un patient
+- **Patient** : Si vous voulez faire sortir des produits du dépôt (qui peut aussi bien être une pharmacie) Vers un client
 
 - **Service** :Si vous voulez faire sortir des produits du dépôt (qui peut aussi bien être une pharmacie) vers un service
 
@@ -38,7 +38,7 @@ Sortie de stock à destination d'un patient
     - La description
 - Insérer les inventaires ainsi que leur lot et quantité
 - Cliquer sur soumettre pour valider la sortie des stocks.
-- Un document apparait renseignant la sortie en stock vers un patient.
+- Un document apparait renseignant la sortie en stock Vers un client.
 
 ## Service
 

@@ -44,6 +44,7 @@ BEGIN
   DECLARE TO_PATIENT_FLUX_ID INT(11) DEFAULT 9;
   DECLARE TO_SERVICE_FLUX_ID INT(11) DEFAULT 10;
   DECLARE TO_LOSS_FLUX_ID INT(11) DEFAULT 11;
+  DECLARE EXPENSE_ACCOUNT INT(11) DEFAULT 5;
 
   -- transaction type
   DECLARE STOCK_EXIT_TYPE SMALLINT(5) DEFAULT 13;
@@ -174,7 +175,8 @@ BEGIN
   CREATE TEMPORARY TABLE tmp_voucher_credit_item (
     `account_id`      INT UNSIGNED NOT NULL,
     `debit`           DECIMAL(19,4) UNSIGNED NOT NULL DEFAULT 0.0000,
-    `credit`          DECIMAL(19,4) UNSIGNED NOT NULL DEFAULT 0.0000
+    `credit`          DECIMAL(19,4) UNSIGNED NOT NULL DEFAULT 0.0000,
+    `cost_center_id`  MEDIUMINT(8) UNSIGNED NULL
   );
 
   -- loop in the cursor
@@ -196,20 +198,34 @@ BEGIN
       SET voucher_item_account_credit = v_cogs_account;
     END IF;
 
+
     -- insert debit
     -- insert cost center id only for debit (exploitation account in case of stock exit)
     INSERT INTO voucher_item (uuid, account_id, debit, credit, voucher_uuid, document_uuid, description, cost_center_id)
       VALUES (HUID(UUID()), voucher_item_account_debit, (v_unit_cost * v_quantity), 0, voucher_uuid, v_document_uuid, v_item_description, voucher_item_cost_center_id);
 
+
+    SET @expense_cos_center_id = NULL;
+    IF isExit = 0 THEN
+      SELECT `type_id`, `cost_center_id`
+      INTO @accountType, @accountCostCenterId
+      FROM account 
+      WHERE id = voucher_item_account_credit;
+
+      IF (@accountType = EXPENSE_ACCOUNT) THEN 
+          SET @expense_cos_center_id = @accountCostCenterId;
+      END IF;
+    END IF;
+
     -- insert credit into temporary table for later aggregation.
-    INSERT INTO tmp_voucher_credit_item (account_id, debit, credit)
-      VALUES (voucher_item_account_credit, 0, (v_unit_cost * v_quantity));
+    INSERT INTO tmp_voucher_credit_item (account_id, debit, credit, cost_center_id)
+      VALUES (voucher_item_account_credit, 0, (v_unit_cost * v_quantity), @expense_cos_center_id);
 
   END LOOP insert_voucher_item;
 
   -- write the credit lines
-  INSERT INTO voucher_item (uuid, account_id, debit, credit, voucher_uuid, document_uuid, description)
-    SELECT HUID(UUID()), tmp_v.account_id, SUM(tmp_v.debit), SUM(tmp_v.credit), voucher_uuid, documentUuid, voucher_description
+  INSERT INTO voucher_item (uuid, account_id, debit, credit, voucher_uuid, document_uuid, description, cost_center_id)
+    SELECT HUID(UUID()), tmp_v.account_id, SUM(tmp_v.debit), SUM(tmp_v.credit), voucher_uuid, documentUuid, voucher_description, tmp_v.cost_center_id
     FROM tmp_voucher_credit_item AS tmp_v
     GROUP BY tmp_v.account_id;
 

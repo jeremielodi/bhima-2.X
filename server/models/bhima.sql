@@ -177,13 +177,10 @@ INSERT INTO unit VALUES
   (301, 'Purchase Prices Report','REPORT.PURCHASE_PRICES.TITLE','Report on purchase prices over time', 285,'/reports/purchase_prices'),
   (302, 'Cost Centers Accounts Report','TREE.COST_CENTER_ACCOUNTS_REPORT','Report of cc accounts values', 286,'/reports/cost_center_accounts'),
   (303, 'Cost Centers Balance Report','TREE.COST_CENTER_INCOME_EXPENSE_REPORT','Report of cc balance', 286,'/reports/cost_center_income_and_expense'),
-  (304, '[SETTINGS] Settings', 'TREE.PAYROLL_SETTINGS', 'Payroll Settings', 57, '/payroll/setting');
-
+  (304, '[SETTINGS] Settings', 'TREE.PAYROLL_SETTINGS', 'Payroll Settings', 57, '/payroll/setting'),
   (305,'Customer','INVOICING.CUSTOMER','The Customer Super-Category',0,'/CUSTOMER_FOLDER'),
   (306,'Customer Registration','INVOICING.CUSTOMER_REGISTER','Register customers',305,'/customer/register'),
   (307,'Customer Registry','INVOICING.CUSTOMER_REGISTRY','Customer Registry',305,'/customers');
-
-
 
 
 -- Reserved system account type

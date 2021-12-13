@@ -123,7 +123,6 @@ class DatabaseConnector {
 
         if (rows.length < 1) {
           debug(`#one(): Found too few records!  Expected 1 but ${rows.length} found.`);
-          console.log(sql);
           throw new NotFound(errorMessage);
         }
 

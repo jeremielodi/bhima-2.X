@@ -555,7 +555,7 @@ CREATE TABLE `employee_advantage` (
 DROP TABLE IF EXISTS `enterprise`;
 CREATE TABLE `enterprise` (
   `id`              SMALLINT(5) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `name`            VARCHAR(50) NOT NULL,
+  `name`            VARCHAR(150) NOT NULL,
   `abbr`            VARCHAR(10) DEFAULT NULL,
   `phone`           VARCHAR(20) DEFAULT NULL,
   `email`           VARCHAR(100) DEFAULT NULL,

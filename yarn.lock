@@ -71,14 +71,14 @@
   resolved "https://registry.npmjs.org/@iarna/toml/-/toml-2.2.5.tgz#b32366c89b43c6f8cefbdefac778b9c828e3ba8c"
   integrity sha512-trnsAYxU3xnS1gPHPyU961coFyLkh4gAD/0zQ5mymY4yOZ+CYvsPqUbOFSw0aDM4y0tV7tiFxL/1XfXPNC6IPg==
 
-"@ima-worldhealth/coral@^2.7.3":
-  version "2.8.0"
-  resolved "https://registry.npmjs.org/@ima-worldhealth/coral/-/coral-2.8.0.tgz#aae26078894f91b1ae82650bfbf9d6cc90773e51"
-  integrity sha512-y5jG+Za5Nry90Nkj5gC4R52/mxm1xTKbWUaOd7VPw+KX1Vu3AOhOBAYwuwHtN9aZ61Dacpf8P4lLNhh0q25HEQ==
+"@ima-worldhealth/coral@^2.9.2":
+  version "2.9.2"
+  resolved "https://registry.yarnpkg.com/@ima-worldhealth/coral/-/coral-2.9.2.tgz#08dae4665ddcf83fdf9f1d4a5ab5039726b516b1"
+  integrity sha512-RFUsALntuSN5EcCRRKoHzVapyDO42pcgq4UOcdO8PS9HyGaRSMXMFURWRjqJHTM/q03feVMZ7UOUX0O83r0ztg==
   dependencies:
     debug "^4.1.1"
     inline-source "^7.2.0"
-    puppeteer "^12.0.0"
+    puppeteer "^13.0.0"
     puppeteer-cluster "^0.22.0"
 
 "@ima-worldhealth/rewire@^4.1.0":
@@ -2441,10 +2441,10 @@ detect-newline@^3.1.0:
   resolved "https://registry.npmjs.org/detect-newline/-/detect-newline-3.1.0.tgz#576f5dfc63ae1a192ff192d8ad3af6308991b651"
   integrity sha512-TLz+x/vEXm/Y7P7wn1EJFNLxYpUD4TgMosxY6fAVJUnJMbupHBOncxyWUG9OpTaH9EBD7uFI5LfEgmMOc54DsA==
 
-devtools-protocol@0.0.937139:
-  version "0.0.937139"
-  resolved "https://registry.npmjs.org/devtools-protocol/-/devtools-protocol-0.0.937139.tgz#bdee3751fdfdb81cb701fd3afa94b1065dafafcf"
-  integrity sha512-daj+rzR3QSxsPRy5vjjthn58axO8c11j58uY0lG5vvlJk/EiOdCWOptGdkXDjtuRHr78emKq0udHCXM4trhoDQ==
+devtools-protocol@0.0.948846:
+  version "0.0.948846"
+  resolved "https://registry.yarnpkg.com/devtools-protocol/-/devtools-protocol-0.0.948846.tgz#bff47e2d1dba060130fa40ed2e5f78b916ba285f"
+  integrity sha512-5fGyt9xmMqUl2VI7+rnUkKCiAQIpLns8sfQtTENy5L70ktbNw0Z3TFJ1JoFNYdx/jffz4YXU45VF75wKZD7sZQ==
 
 di@^0.0.1:
   version "0.0.1"
@@ -7098,13 +7098,13 @@ puppeteer-cluster@^0.22.0:
   dependencies:
     debug "^4.1.1"
 
-puppeteer@^12.0.0:
-  version "12.0.1"
-  resolved "https://registry.npmjs.org/puppeteer/-/puppeteer-12.0.1.tgz#ae79d0e174a07563e0bf2e05c94ccafce3e70033"
-  integrity sha512-YQ3GRiyZW0ddxTW+iiQcv2/8TT5c3+FcRUCg7F8q2gHqxd5akZN400VRXr9cHQKLWGukmJLDiE72MrcLK9tFHQ==
+puppeteer@^13.0.0:
+  version "13.1.1"
+  resolved "https://registry.yarnpkg.com/puppeteer/-/puppeteer-13.1.1.tgz#63771eb744202aa91918c49123f846e1747da121"
+  integrity sha512-GwdFy1JQ43Hhxj6MraXme+XfCX2CKe18MuwToXTMEAk0txg6vUEgwqBnzErTTqDVZ7sWYrDtDaRCfD2y7ZwgGw==
   dependencies:
     debug "4.3.2"
-    devtools-protocol "0.0.937139"
+    devtools-protocol "0.0.948846"
     extract-zip "2.0.1"
     https-proxy-agent "5.0.0"
     node-fetch "2.6.5"
